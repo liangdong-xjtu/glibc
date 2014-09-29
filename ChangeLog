@@ -1,5 +1,17 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/x86_64/cancellation.S: Remove file.
+	* sysdeps/unix/sysv/linux/x86_64/libc-cancellation.S: Remove file.
+	* sysdeps/unix/sysv/linux/x86_64/librt-cancellation.S: Remove file.
+	* sysdeps/unix/sysv/linux/x86_64/lowlevellock.h (lll_wait_tid):
+	Use cancellable futex wait call.
+	* sysdeps/unix/sysv/linux/x86_64/sysdep-cancel.h (__pthread_get_ip):
+	New function.
+	* sysdeps/x86_64/nptl/tcb-offsets.sym (TCB_CANCELING_BITMASK):
+	Remove.
+	* sysdeps/x86_64/nptl/tls.h (THREAD_ATOMIC_BIT_SET): Remove
+	macro.
+
 	* nptl/Makefile [routines]: Add syscall_cancel object.
 	[libpthread-routines]: Remove cancellation object.
 	(CFLAGS-cancellation.c): Remove rule.
