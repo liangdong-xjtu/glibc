@@ -24,6 +24,7 @@ CFLAGS-semtimedop.os += $(uses-6-syscall-arguments)
 endif
 
 ifeq ($(subdir),elf)
+sysdep-rtld_routines += libc-do-syscall
 sysdep-others += lddlibc4
 install-bin += lddlibc4
 endif
