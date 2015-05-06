@@ -20,6 +20,7 @@
 #include <tls.h>
 #ifndef __ASSEMBLER__
 # include <nptl/pthreadP.h>
+# include <sys/ucontext.h>
 #endif
 
 #if IS_IN (libc) || IS_IN (libpthread) || IS_IN (librt)
@@ -51,3 +52,9 @@ extern int __local_multiple_threads attribute_hidden;
 # define RTLD_SINGLE_THREAD_P \
   __builtin_expect (THREAD_GETMEM (THREAD_SELF, \
 				   header.multiple_threads) == 0, 1)
+
+static inline
+uintptr_t __pthread_get_pc (const struct ucontext *uc)
+{
+  return uc->uc_mcontext.pc;
+}
