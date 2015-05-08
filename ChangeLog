@@ -1,5 +1,9 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/arm/syscall_cancel.S: New file.
+	* sysdeps/unix/sysv/linux/arm/sysdep-cancel.h (__pthread_get_pc):
+	New function.
+
 	* sysdeps/unix/sysv/linux/aarch64/sysdep-cancel.h
 	(__pthread_get_pc): New function.
 
