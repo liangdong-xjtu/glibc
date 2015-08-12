@@ -38,3 +38,10 @@
 #define RTLD_SINGLE_THREAD_P \
   __builtin_expect (THREAD_GETMEM (THREAD_SELF, \
 				   header.multiple_threads) == 0, 1)
+
+static inline
+uintptr_t __pthread_get_pc (const struct ucontext *uc)
+{
+  /* We have 31bit addresses, remove bit 0.  */
+  return uc->uc_mcontext.psw.addr & 0x7FFFFFFF;
+}

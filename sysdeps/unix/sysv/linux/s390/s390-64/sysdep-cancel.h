@@ -26,6 +26,8 @@
 #  define __local_multiple_threads	__pthread_multiple_threads
 # elif IS_IN (libc)
 #  define __local_multiple_threads	__libc_multiple_threads
+# elif !IS_IN (librt)
+#  error Unsupported library
 # endif
 
 # if IS_IN (libpthread) || IS_IN (libc)
@@ -51,3 +53,9 @@ extern int __local_multiple_threads attribute_hidden;
 #define RTLD_SINGLE_THREAD_P \
   __builtin_expect (THREAD_GETMEM (THREAD_SELF, \
 				   header.multiple_threads) == 0, 1)
+
+static inline
+uintptr_t __pthread_get_pc (const struct ucontext *uc)
+{
+  return uc->uc_mcontext.psw.addr;
+}
