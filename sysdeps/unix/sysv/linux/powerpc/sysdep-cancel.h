@@ -36,3 +36,13 @@
 #define RTLD_SINGLE_THREAD_P \
   __builtin_expect (THREAD_GETMEM (THREAD_SELF, \
 				   header.multiple_threads) == 0, 1)
+
+static inline
+uintptr_t __pthread_get_pc (const ucontext_t *uc)
+{
+#ifdef __powerpc64__
+  return uc->uc_mcontext.gp_regs[PT_NIP];
+#else
+  return uc->uc_mcontext.uc_regs->gregs[PT_NIP];
+#endif
+}
