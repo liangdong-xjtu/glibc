@@ -86,6 +86,31 @@ create_temp_file (const char *base, char **filename)
   return fd;
 }
 
+int
+create_temp_fifo (const char *base, char **fifoname)
+{
+  char *fname = (char *) xmalloc (strlen (test_dir) + 1 + strlen (base)
+				  + sizeof ("XXXXXX"));
+  strcpy (stpcpy (stpcpy (stpcpy (fname, test_dir), "/"), base), "XXXXXX");
+
+  mktemp (fname);
+  int fd = mkfifo (fname, 0600);
+  if (fd == -1)
+    {
+      printf ("cannot open temporary fifo '%s': %m\n", fname);
+      free (fname);
+      return -1;
+    }
+
+  add_temp_file (fname);
+  if (fifoname != NULL)
+    *fifoname = fname;
+  else
+    free (fname);
+
+  return fd;
+}
+
 /* Helper functions called by the test skeleton follow.  */
 
 void

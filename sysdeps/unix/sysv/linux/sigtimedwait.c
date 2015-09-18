@@ -49,9 +49,12 @@ __sigtimedwait (const sigset_t *set, siginfo_t *info,
     }
 #endif
 
-    /* XXX The size argument hopefully will have to be changed to the
-       real size of the user-level sigset_t.  */
-  int result = SYSCALL_CANCEL (rt_sigtimedwait, set, info, timeout, _NSIG / 8);
+  /* XXX The size argument hopefully will have to be changed to the
+     real size of the user-level sigset_t.  */
+  int result;
+  do
+    result = SYSCALL_CANCEL (rt_sigtimedwait, set, info, timeout, _NSIG / 8);
+  while (result < 0 && errno == EINTR);
 
   /* The kernel generates a SI_TKILL code in si_code in case tkill is
      used.  tkill is transparently used in raise().  Since having
@@ -62,7 +65,7 @@ __sigtimedwait (const sigset_t *set, siginfo_t *info,
 
   return result;
 }
-libc_hidden_def (__sigtimedwait)
+hidden_def (__sigtimedwait)
 weak_alias (__sigtimedwait, sigtimedwait)
 #else
 # include <signal/sigtimedwait.c>
