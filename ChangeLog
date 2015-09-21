@@ -1,5 +1,18 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* debug/tst-backtrace5.c (handle_signal): Check for syscall
+	instead of read.
+	(fn): Issue the read syscall instead of call the cancellable
+	syscall.
+	* nptl/Makefile [$(run-built-tests) = yes] (tests-special): Remove
+	tst-cancel-wrappers.sh.
+	* nptl/tst-cancel-wrappers.sh: Remove file.
+	* nptl/tst-cancel2.c (do_test): Do not close pipe.
+	* nptl/tst-cancel3.c (do_test): Likewise.
+	* nptl/tst-cancel4.c (tf_write): Handle cancelled syscall with
+	side-effects.
+	(tf_send): Likewise.
+
 	* sysdeps/unix/make-syscalls.sh: Remove cancellable tagging for
 	syscall definitions.
 	* sysdeps/unix/syscall-template.S (SYSCALL_CANCELLABLE): Remove
