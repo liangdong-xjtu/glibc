@@ -108,6 +108,7 @@ CFLAGS-getusershell.c = -fexceptions
 CFLAGS-err.c = -fexceptions
 CFLAGS-tst-tsearch.c = $(stack-align-test-flags)
 CFLAGS-msync.c = -fexceptions
+CFLAGS-fdatasync.c = -fexceptions
 
 # Called during static library initialization, so turn stack-protection
 # off for non-shared builds.
