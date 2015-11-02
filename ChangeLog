@@ -1,5 +1,11 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/Makefile (sysdep_routines): Add splice.
+	(CFLAGS-splice.c): New flag.
+	* sysdeps/unix/sysv/linux/splice.c: New file.
+	* sysdeps/unix/sysv/linux/syscalls.list (splice): Remove from
+	auto-generation syscall list.
+
 	* sysdeps/unix/sysv/linux/Makefile (CFLAGS-vmsplice.c): New flag.
 	* sysdeps/unix/sysv/linux/syscalls.list (vmsplice): Remove from
 	auto-generation syscall list.
