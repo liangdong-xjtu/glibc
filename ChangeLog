@@ -1,5 +1,9 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* io/Makefile (CFLAGS-read.c): New rule.
+	* nptl/Makefile (CFLAGS-read.c): New rule.
+	* sysdeps/unix/sysv/linux/read.c: New file.
+
 	* io/Makefile (CFLAGS-creat.c): New rule.
 	(CFLAGS-creat64.c): Likewise.
 	* sysdeps/unix/sysv/linux/alpha/creat.c: Remove file.
