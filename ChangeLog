@@ -1,5 +1,7 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/readv.c: New file.
+
 	* io/Makefile (CFLAGS-write.c): New rule.
 	* nptl/Makefile (CFLAGS-write.c): Likewise.
 	* sysdeps/unix/sysv/linux/write.c: New file.
