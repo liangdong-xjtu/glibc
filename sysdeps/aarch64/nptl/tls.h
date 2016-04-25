@@ -47,6 +47,8 @@ typedef struct
 {
   dtv_t *dtv;
   void *private;
+  /* GCC split stack support.  */
+  void *__private_ss;
 } tcbhead_t;
 
 /* This is the size of the initial TCB.  */

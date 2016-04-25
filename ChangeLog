@@ -1,3 +1,14 @@
+2016-07-28  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
+
+	* sysdeps/aarch64/Makefile [$(subdir) == elf] (sysdep-dl-routines):
+	Add tcb-version.
+	* sysdeps/aarch64/Version [ld] (GLIBC_2.25): Define __tcb_private
+	ss;
+	* sysdeps/aarch64/nptl/tls.h (tcbhead_t): Add __private_ss field.
+	* sysdeps/unix/sysv/linux/aarch64/ld.abilist: Add GLIBC_2.25 and
+	__tcb_private_ss.
+	* sysdeps/aarch64/tcb-version.c: New file.
+
 2016-07-27  H.J. Lu  <hongjiu.lu@intel.com>
 
 	[BZ #20384]

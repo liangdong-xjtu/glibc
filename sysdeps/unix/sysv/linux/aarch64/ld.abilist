@@ -9,3 +9,5 @@ GLIBC_2.17 calloc F
 GLIBC_2.17 free F
 GLIBC_2.17 malloc F
 GLIBC_2.17 realloc F
+GLIBC_2.25 GLIBC_2.24 A
+GLIBC_2.25 __tcb_private_ss F
