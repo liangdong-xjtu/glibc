@@ -1,4 +1,4 @@
-/* Copyright (C) 2011-2017 Free Software Foundation, Inc.
+/* Copyright (C) 2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
    Contributed by Chris Metcalf <cmetcalf@tilera.com>, 2011.
 
@@ -37,7 +37,11 @@ __libc_open (const char *file, int oflag, ...)
       va_end (arg);
     }
 
+#ifdef __NR_open
+  return SYSCALL_CANCEL (open, file, oflag, mode);
+#else
   return SYSCALL_CANCEL (openat, AT_FDCWD, file, oflag, mode);
+#endif
 }
 libc_hidden_def (__libc_open)
 
@@ -45,18 +49,8 @@ weak_alias (__libc_open, __open)
 libc_hidden_weak (__open)
 weak_alias (__libc_open, open)
 
-int
-__open_nocancel (const char *file, int oflag, ...)
-{
-  int mode = 0;
-
-  if (__OPEN_NEEDS_MODE (oflag))
-    {
-      va_list arg;
-      va_start (arg, oflag);
-      mode = va_arg (arg, int);
-      va_end (arg);
-    }
-
-  return INLINE_SYSCALL (openat, 4, AT_FDCWD, file, oflag, mode);
-}
+#if __WORDSIZE == 64
+weak_alias (__libc_open, __open64)
+libc_hidden_weak (__open64)
+weak_alias (__libc_open, open64)
+#endif
