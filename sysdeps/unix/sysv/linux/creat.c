@@ -1,6 +1,6 @@
-/* Copyright (C) 2011-2017 Free Software Foundation, Inc.
+/* Linux default implementation for creat.
+   Copyright (C) 2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
-   Contributed by Chris Metcalf <cmetcalf@tilera.com>, 2011.
 
    The GNU C Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Lesser General Public
@@ -20,18 +20,17 @@
 #include <sys/types.h>
 #include <sysdep-cancel.h>
 
-#undef	creat
-
 /* Create FILE with protections MODE.  */
 int
-creat (const char *file, mode_t mode)
+__creat (const char *file, mode_t mode)
 {
+#ifdef __NR_creat
+  return SYSCALL_CANCEL (creat, file, mode);
+#else
   return __open (file, O_WRONLY | O_CREAT | O_TRUNC, mode);
+#endif
 }
-
-/* __open handles cancellation.  */
-LIBC_CANCEL_HANDLED ();
-
+weak_alias (__creat, creat)
 #if __WORDSIZE == 64
-weak_alias (creat, creat64)
+weak_alias (__creat, creat64)
 #endif
