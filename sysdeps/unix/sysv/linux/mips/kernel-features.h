@@ -34,6 +34,8 @@
 # define __ASSUME_ALIGNED_REGISTER_PAIRS	1
 /* mips32 only supports ipc syscall.  */
 # undef __ASSUME_DIRECT_SYSVIPC_SYSCALLS
+/* mips32 support wire-up network syscalls.  */
+# define __ASSUME_RECV_SYSCALL		1
 #endif
 
 /* Define that mips64-n32 is a ILP32 ABI to set the correct interface to

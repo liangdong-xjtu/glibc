@@ -1,5 +1,54 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/alpha/kernel-features.h
+	(__ASSUME_RECV_SYSCALL): Define.
+	* sysdeps/unix/sysv/linux/arm/kernel-features.h
+	(__ASSUME_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/hppa/kernel-features.h
+	(__ASSUME_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/ia64/kernel-features.h
+	(__ASSUME_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/mips/kernel-features.h
+	[_MIPS_SIM == _ABIO32] (__ASSUME_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/hppa/syscalls.list
+	(__ASSUME_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/i386/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define whether the kernel supports it.
+	(__ASSUME_RECVFROM_FOR_RECV_SYSCALL): Undefine.
+	* sysdeps/unix/sysv/linux/m68k/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define whether the kernel supports it.
+	(__ASSUME_RECVFROM_FOR_RECV_SYSCALL): Undefine.
+	* sysdeps/unix/sysv/linux/s390/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define whether the kernel supports it.
+	(__ASSUME_RECVFROM_FOR_RECV_SYSCALL): Undefine.
+	* sysdeps/unix/sysv/linux/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define as default.
+	* sysdeps/unix/sysv/linux/microblaze/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define.
+	(__ASSUME_RECVFROM_FOR_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/powerpc/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define.
+	(__ASSUME_RECVFROM_FOR_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/sh/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define.
+	(__ASSUME_RECVFROM_FOR_RECV_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/sparc/kernel-features.h
+	(__ASSUME_RECVFROM_SYSCALL): Define whether the kernel supports it.
+	* sysdeps/unix/sysv/linux/alpha/syscalls.list: Remove recv and
+	recvfrom from uto-generation list.
+	* sysdeps/unix/sysv/linux/arm/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/generic/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/hppa/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/ia64/syscalls.list: Likwise.
+	* sysdeps/unix/sysv/linux/mips/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/sparc/sparc64/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/generic/recv.c: Remove file.
+	* sysdeps/unix/sysv/linux/x86_64/recv.c: Likewise.
+	* sysdeps/unix/sysv/linux/mips/mips64/recv.c: Likewise.
+	* sysdeps/unix/sysv/linux/recv.c
+	(__ASSUME_RECVFROM_FOR_RECV_SYSCALL): Replace by
+	__ASSUME_RECVFROM_SYSCALL.
+
 	* sysdeps/unix/sysv/linux/alpha/syscalls.list: Remove connect from
 	auto-generation list.
 	* sysdeps/unix/sysv/linux/arm/syscalls.list: Likewise.
