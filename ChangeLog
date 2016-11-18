@@ -1,5 +1,60 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/generic/send.c: Remove file.
+	* sysdeps/unix/sysv/linux/x86_64/send.c: Likewise.
+	* sysdeps/unix/sysv/linux/mips/mips64/send.c: Likewise.
+	* sysdeps/unix/sysv/linux/alpha/kernel-features.h
+	(__ASSUME_SEND_SYSCALL): Define.
+	* sysdeps/unix/sysv/linux/arm/kernel-features.h
+	(__ASSUME_SEND_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/hppa/kernel-features.h
+	(__ASSUME_SEND_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/ia64/kernel-features.h
+	(__ASSUME_SEND_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/microblaze/kernel-features.h
+	(__ASSUME_SEND_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/mips/kernel-features.h
+	[_MIPS_SIM == _ABIO32] (__ASSUME_SEND_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/sh/kernel-features.h
+	(__ASSUME_SEND_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/i386/kernel-features.h
+	(__ASSUME_SENDTO_FOR_SEND_SYSCALL): Remove.
+	(__ASSUME_SENDTO_SYSCALL): Define wheter the kernel supports it.
+	* sysdeps/unix/sysv/linux/m68k/kernel-features.h
+	(__ASSUME_SENDTO_FOR_SEND_SYSCALL): Remove.
+	(__ASSUME_SENDTO_SYSCALL): Define wheter the kernel supports it.
+	* sysdeps/unix/sysv/linux/s390/kernel-features.h
+	(__ASSUME_SENDTO_FOR_SEND_SYSCALL): Remove.
+	(__ASSUME_SENDTO_SYSCALL): Define wheter the kernel supports it.
+	* sysdeps/unix/sysv/linux/kernel-features.h
+	(__ASSUME_SENDTO_SYSCALL): Define as default.
+	* sysdeps/unix/sysv/linux/microblaze/kernel-features.h
+	(__ASSUME_SENDTO_FOR_SEND_SYSCALL): Define.
+	(__ASSUME_SENDTO_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/powerpc/kernel-features.h
+	(__ASSUME_SENDTO_SYSCALL): Remove defune.
+	* sysdeps/unix/sysv/linux/send.c (__ASSUME_SENDTO_FOR_SEND_SYSCALL):
+	Replace by __ASSUME_SENDTO_SYSCALL.
+	* sysdeps/unix/sysv/linux/sh/kernel-features.h
+	(__ASSUME_SEND_SYSCALL): Remove define.
+	(__ASSUME_SENDTO_SYSCALL): Likewise.
+	* sysdeps/unix/sysv/linux/sysdep.h (HAVE_INTERNAL_SEND_SYMBOl)
+	* sysdeps/unix/sysv/linux/aarch64/sysdep.h
+	(HAVE_INTERNAL_SEND_SYMBOl): Undefine.
+	* sysdeps/unix/sysv/linux/nios2/sysdep.h
+	(HAVE_INTERNAL_SEND_SYMBOl): Likewise.
+	* sysdeps/unix/sysv/linux/tile/sysdep.h
+	(HAVE_INTERNAL_SEND_SYMBOl): Likewise.
+	* sysdeps/unix/sysv/linux/alpha/syscalls.list: Remove send and
+	sendto from auto-generation list.
+	* sysdeps/unix/sysv/linux/arm/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/generic/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/hppa/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/ia64/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/mips/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/sparc/sparc64/syscalls.list: Likewise.
+	* sysdeps/unix/sysv/linux/x86_64/syscalls.list: Likewise.
+
 	* sysdeps/unix/sysv/linux/alpha/kernel-features.h
 	(__ASSUME_RECV_SYSCALL): Define.
 	* sysdeps/unix/sysv/linux/arm/kernel-features.h

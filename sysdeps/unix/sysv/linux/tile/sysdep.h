@@ -218,6 +218,10 @@
 #define HAVE_CLOCK_GETTIME_VSYSCALL	1
 #define HAVE_GETTIMEOFDAY_VSYSCALL	1
 
+/* Previously tile used the generic version withouth the libc_hidden_def
+   which lead in a non existent __send symbol in libc.so.  */
+# undef HAVE_INTERNAL_SEND_SYMBOl
+
 #endif /* __ASSEMBLER__  */
 
 /* Pointer mangling support.  */

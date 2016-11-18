@@ -140,6 +140,10 @@
 /* In order to get __set_errno() definition in INLINE_SYSCALL.  */
 #include <errno.h>
 
+/* Previously AArch64 used the generic version withouth the libc_hidden_def
+   which lead in a non existent __send symbol in libc.so.  */
+# undef HAVE_INTERNAL_SEND_SYMBOl
+
 /* Define a macro which expands into the inline wrapper code for a system
    call.  */
 #undef INLINE_SYSCALL
