@@ -1,5 +1,10 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/generic/poll.c: Remove file.
+	* sysdeps/unix/sysv/linux/poll.c: New file.
+	* sysdeps/unix/sysv/linux/syscalls.list: Remove poll from
+	auto-generation list.
+
 	* sysdeps/unix/sysv/linux/generic/send.c: Remove file.
 	* sysdeps/unix/sysv/linux/x86_64/send.c: Likewise.
 	* sysdeps/unix/sysv/linux/mips/mips64/send.c: Likewise.
