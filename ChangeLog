@@ -1,5 +1,14 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/epoll_wait.c: New file.
+	* sysdeps/unix/sysv/linux/generic/epoll_wait.c: Remove file.
+	* sysdeps/unix/sysv/linux/syscalls.list: Remove epoll_wait from
+	auto-generation list.
+	* sysdeps/unix/sysv/linux/Makefile (sysdep_routines): Add
+	epoll_wait.
+	* sysdeps/unix/sysv/linux/generic/Makefile (sysdep_routines):
+	Remove epoll_wait.
+
 	* sysdeps/unix/sysv/linux/generic/pause.c: Remove file.
 	* sysdeps/unix/sysv/linux/sparc/sparc64/pause.c: Likewise.
 	* sysdeps/unix/sysv/linux/pause.c: New file.
