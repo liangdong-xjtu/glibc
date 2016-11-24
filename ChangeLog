@@ -1,5 +1,8 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/alpha/sigsuspend.S: Remove file.
+	* sysdeps/unix/sysv/linux/sigsuspend.c: Simplify include list.
+
 	* sysdeps/unix/sysv/linux/Makefile (sysdeps_routines): Add tee.
 	* sysdeps/unix/sysv/linux/syscalls.list: Remove tee from
 	auto-generated list.
