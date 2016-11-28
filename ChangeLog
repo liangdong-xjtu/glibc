@@ -1,5 +1,20 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/arm/fcntl.c: Remove file.
+	* sysdeps/unix/sysv/linux/generic/wordsize-32/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/hppa/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/i386/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/m68k/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/microblaze/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/mips/mips32/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/mips/mips64/n32/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/powerpc/powerpc32/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/powerpc/powerpc64/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/s390/s390-32/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/sh/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/sparc/sparc32/fcntl.c: Likewise.
+	* sysdeps/unix/sysv/linux/fcntl.c: New file.
+
 	* rt/Makefile (CFLAGS-mq_timedsend.c): New flag.
 	* sysdeps/unix/sysv/linux/mq_timedsend.c: New file.
 	* sysdeps/unix/sysv/linux/syscalls.list (mq_timedsend): Remove from
