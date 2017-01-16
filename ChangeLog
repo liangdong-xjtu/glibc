@@ -1,5 +1,11 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/sparc/sysdep-cancel.h (__pthread_get_pc):
+	New function.
+	* sysdeps/unix/sysv/linux/sparc/sparc32/syscall_cancel.S: New file.
+	* sysdeps/unix/sysv/linux/sparc/sparc64/syscall_cancel.S: Likwise.
+	* sysdeps/unix/sysv/linux/sparc/sparc64/pause.c: Likewise.
+
 	* sysdeps/unix/sysv/linux/tile/sysdep-cancel.h (__pthread_get_pc):
 	New function.
 
