@@ -37,3 +37,12 @@
 #define RTLD_SINGLE_THREAD_P \
   __builtin_expect (THREAD_GETMEM (THREAD_SELF, \
 				   header.multiple_threads) == 0, 1)
+
+static inline
+uintptr_t __pthread_get_pc (const struct ucontext *uc)
+{
+  /* rt_restore_ucontext (arch/nios/kernel/signal.c) sets this position
+     to 'ea' register which is stated as exception return address (pc)
+     at arch/nios2/include/asm/ptrace.h.  */
+  return uc->uc_mcontext.regs[27];
+}
