@@ -178,6 +178,12 @@ __nptl_set_robust (struct pthread *self)
 
 #ifdef SIGCANCEL
 
+/* Workaround for ia64 where uc_sigmask is an unsigned long rather than the
+   larger userspace sigset_t.  */
+#ifndef sigaddset_cancel
+# define sigaddset_cancel(set) __sigaddset ((set), SIGCANCEL)
+#endif
+
 /* For asynchronous cancellation we use a signal.  This is the handler.  */
 static void
 sigcancel_handler (int sig, siginfo_t *si, void *ctx)
@@ -202,7 +208,7 @@ sigcancel_handler (int sig, siginfo_t *si, void *ctx)
       || ((pd->cancelhandling & CANCELED_BITMASK) == 0))
     return;
 
-  __sigaddset (&uc->uc_sigmask, SIGCANCEL);
+  sigaddset_cancel (&uc->uc_sigmask);
 
   /* Check if asynchronous cancellation mode is set and if interrupted
      instruction pointer falls within the cancellable syscall bridge.  For
