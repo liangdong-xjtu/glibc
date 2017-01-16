@@ -1,5 +1,8 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/alpha/sysdep-cancel.h (__pthread_get_pc):
+	New function.
+
 	* nptl/nptl-init.c (sigaddset_cancel): New macro.
 	(sigcancel_handler): Use sigaddset_cancel instead of __sigaddset.
 	* sysdeps/unix/sysv/linux/ia64/sysdep-cancel.h (__pthread_get_pc):
