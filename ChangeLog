@@ -1,5 +1,8 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/tile/sysdep-cancel.h (__pthread_get_pc):
+	New function.
+
 	* sysdeps/unix/sysv/linux/microblaze/sysdep-cancel.h
 	(__pthread_get_pc): New function.
 
