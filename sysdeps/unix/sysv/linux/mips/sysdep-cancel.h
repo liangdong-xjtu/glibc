@@ -15,6 +15,9 @@
    License along with the GNU C Library.  If not, see
    <http://www.gnu.org/licenses/>.  */
 
+#ifndef __SYSDEP_CANCEL_H
+# define __SYSDEP_CANCEL_H
+
 #include <sysdep.h>
 #include <sysdeps/generic/sysdep.h>
 #include <tls.h>
@@ -37,3 +40,11 @@
 #define RTLD_SINGLE_THREAD_P \
   __builtin_expect (THREAD_GETMEM (THREAD_SELF, \
 				   header.multiple_threads) == 0, 1)
+
+static inline
+uintptr_t __pthread_get_pc (const struct ucontext *uc)
+{
+  return uc->uc_mcontext.pc;
+}
+
+#endif /* __SYSDEP_CANCEL_H  */

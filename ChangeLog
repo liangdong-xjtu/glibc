@@ -1,5 +1,35 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* nptl/libc-cancellation.c (__syscall_cancel): Define and use 7
+	argument syscall if architecture requires it.
+	* nptl/pthreadP.h (__syscall_cancel_arch): Likewise.
+	(__SYSCALL_CANCEL0): Likewise.
+	(__SYSCALL_CANCEL1): Likewise.
+	(__SYSCALL_CANCEL2): Likewise.
+	(__SYSCALL_CANCEL3): Likewise.
+	(__SYSCALL_CANCEL4): Likewise.
+	(__SYSCALL_CANCEL5): Likewise.
+	(__SYSCALL_CANCEL6): Likewise.
+	(__SYSCALL_CANCEL6): New macro.
+	* sysdeps/unix/sysdep.h (__syscall_cancel): Define with 7 argument
+	if architecture requires it.
+	(__SYSCALL_CANCEL7_ARG_DEF): New macro.
+	(__SYSCALL_CANCEL7_ARG): Likewise.
+	(__SYSCALL_CANCEL7_ARG7): Likewise.
+	* sysdeps/unix/sysv/linux/lowlevellock-futex.h
+	(lll_futex_timed_wait_cancel): Use 7 arguments if architecture requires
+	it.
+	(lll_futex_timed_wait_bitset_cancel): Likewise.
+	* sysdeps/unix/sysv/linux/syscall_cancel.c (__syscall_cancel_arch):
+	Likewise.
+	* sysdeps/mips/nptl/tls.h (READ_THREAD_POINTER): Check __mips_isa_rev
+	existance for macro definition.
+	* sysdeps/unix/sysv/linux/mips/sysdep-cancel.h (__pthread_get_pc):
+	New function.
+	* sysdeps/unix/sysv/linux/mips/mips32/syscall_cancel.S: New file.
+	* sysdeps/unix/sysv/linux/mips/mips32/sysdep.h
+	(HAVE_CANCELABLE_SYSCALL_WITH_7_ARGS): Define.
+
 	* sysdeps/unix/sysv/linux/sh/sysdep-cancel.h (__pthread_get_pc):
 	New function.
 

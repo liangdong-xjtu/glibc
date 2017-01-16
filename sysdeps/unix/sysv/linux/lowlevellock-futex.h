@@ -151,7 +151,8 @@
                                                                               \
     __ret = __syscall_cancel (__NR_futex, __SSC (futexp),		      \
 			      __SSC (__lll_private_flag (__op, private)),     \
-			      __SSC (val), __SSC (timespec), 0, 0);           \
+			      __SSC (val), __SSC (timespec), 0, 0	      \
+			      __SYSCALL_CANCEL7_ARG);                         \
     __ret;								      \
   })
 
@@ -164,7 +165,8 @@
     __ret = __syscall_cancel (__NR_futex, __SSC (futexp),		      \
 			      __SSC (__lll_private_flag (__op, private)),     \
 			      __SSC (val), __SSC (timespec), 0,	              \
-                              FUTEX_BITSET_MATCH_ANY);                        \
+                              FUTEX_BITSET_MATCH_ANY                          \
+			      __SYSCALL_CANCEL7_ARG);                         \
     __ret;								      \
   })
 
