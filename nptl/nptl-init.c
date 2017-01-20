@@ -204,7 +204,7 @@ sigcancel_handler (int sig, siginfo_t *si, void *ctx)
   volatile struct pthread *pd = (volatile struct pthread *) self;
   ucontext_t *uc = ctx;
 
-  if (((pd->cancelhandling & (CANCELSTATE_BITMASK)) != 0)
+  if ((pd->cancelstate == PTHREAD_CANCEL_DISABLE)
       || ((pd->cancelhandling & CANCELED_BITMASK) == 0))
     return;
 
@@ -219,7 +219,7 @@ sigcancel_handler (int sig, siginfo_t *si, void *ctx)
   extern const char __syscall_cancel_arch_start[1];
   extern const char __syscall_cancel_arch_end[1];
   uintptr_t pc = __pthread_get_pc (ctx);
-  if (pd->cancelhandling & CANCELTYPE_BITMASK
+  if (pd->canceltype == PTHREAD_CANCEL_ASYNCHRONOUS
       || (pc >= (uintptr_t) __syscall_cancel_arch_start
           && pc < (uintptr_t) __syscall_cancel_arch_end))
     {

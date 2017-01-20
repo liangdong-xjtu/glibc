@@ -1,5 +1,39 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* nptl/allocatestack.c (get_cached_stack): Set both cancelstate
+	and canceltype on new stack allocation.
+	* nptl/cleanup_defer.c (__pthread_register_cancel_defer): Set
+	canceltype directly instead of using cancelhandling member.
+	(__pthread_unregister_cancel_restore): Likewise.
+	* nptl/cleanup_defer_compat.c (_pthread_cleanup_push_defer):
+	Likewise.
+	(_pthread_cleanup_pop_restore): Likewise.
+	* nptl/descr.h (CANCELSTATE_BIT): Remove flag.
+	(CANCELSTATE_BITMASK): Likewise.
+	(CANCELTYPE_BIT): Likewise.
+	(CANCELTYPE_BITMSK): Likewise.
+	(CANCEL_RESTMASK): Likewise.
+	(CANCEL_ENABLED_AND_CANCELED): Likewise.
+	(CANCEL_ENABLED_AND_CANCELED_AND_ASYNCHRONOUS): Likewise.
+	(cancelstate): New member.
+	(canceltype): Likewise.
+	* nptl/libc-cancellation.c (__syscall_cancel): Use cancelstate
+	instead of cancelhandling member.
+	* nptl/nptl-init.c (sigcancel_handler): Likewise.
+	* nptl/pthreadP.h (__do_cancel): Likewise.
+	(CANCELLATION_P): Likewise.
+	* nptl/pthread_join.c (pthread_join): Remove CANCELLATION_P
+	usage.
+	* nptl/pthread_testcancel.c (__pthread_testcancel): Likewise.
+	* nptl/pthread_setcancelstate.c (__pthread_setcancelstate):
+	Use cancelstate member instead of cancelhandling.
+	* nptl/pthread_setcanceltype.c (__pthread_setcanceltype): Use
+	canceltype member instead of canceltype.
+	* sysdeps/x86_64/nptl/tcb-offsets.sym (TCB_CANCELSTATE_BITMASK):
+	Remove.
+	(TCB_CANCELTYPE_BITMASK): Likewise.
+	(TCB_CANCEL_RETMASK): Likewise.
+
 	* sysdeps/unix/sysv/linux/hppa/syscall_cancel.S: New file.
 	* sysdeps/unix/sysv/linux/hppa/sysdep-cancel.h (__pthread_get_pc):
 	New function.
