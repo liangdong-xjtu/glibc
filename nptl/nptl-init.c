@@ -269,14 +269,11 @@ sighandler_setxid (int sig, siginfo_t *si, void *ctx)
 
   /* Reset the SETXID flag.  */
   struct pthread *self = THREAD_SELF;
-  int flags, newval;
+  unsigned int s = atomic_load_relaxed (&self->setxid_op);
   do
-    {
-      flags = THREAD_GETMEM (self, cancelhandling);
-      newval = THREAD_ATOMIC_CMPXCHG_VAL (self, cancelhandling,
-					  flags & ~SETXID_BITMASK, flags);
-    }
-  while (flags != newval);
+    if (s == 0)
+      return;
+  while (atomic_compare_exchange_weak_acquire (&self->setxid_op, &s, 0));
 
   /* And release the futex.  */
   self->setxid_futex = 1;

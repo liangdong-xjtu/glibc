@@ -1,5 +1,18 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* nptl/allocatestack.c (get_cached_stack): Set sexid_op on new
+	allocated stack.
+	(setxid_mark_thread): Use setxid_op to mark thread as executing
+	a sexid operation insteaf of using cancelhandling.  Also adapt
+	algorithm to use C11 atomic analogous functions.
+	(setxid_unmark_thread): Likewise.
+	(setxid_signal_thread): Likewise.
+	* nptl/nptl-init.c (sighandler_setxid): Likewise.
+	* nptl/pthread_create.c (sighandler_setxid): Likewise.
+	* nptl/descr.h (SETXID_BIT): Remove define.
+	(SETXID_BITMASK): Likewise.
+	(setxid_op): New member.
+
 	* nptl/allocatestack.c (get_cached_stack): Set both cancelstate
 	and canceltype on new stack allocation.
 	* nptl/cleanup_defer.c (__pthread_register_cancel_defer): Set

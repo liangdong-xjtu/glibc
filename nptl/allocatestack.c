@@ -244,6 +244,8 @@ get_cached_stack (size_t *sizep, void **memp)
   /* No pending event.  */
   result->nextevent = NULL;
 
+  result->setxid_op = 0;
+
   /* Clear the DTV.  */
   dtv_t *dtv = GET_DTV (TLS_TPADJ (result));
   for (size_t cnt = 0; cnt < dtv[-1].counter; ++cnt)
@@ -975,8 +977,6 @@ static void
 internal_function
 setxid_mark_thread (struct xid_command *cmdp, struct pthread *t)
 {
-  int ch;
-
   /* Wait until this thread is cloned.  */
   if (t->setxid_futex == -1
       && ! atomic_compare_and_exchange_bool_acq (&t->setxid_futex, -2, -1))
@@ -987,16 +987,15 @@ setxid_mark_thread (struct xid_command *cmdp, struct pthread *t)
   /* Don't let the thread exit before the setxid handler runs.  */
   t->setxid_futex = 0;
 
+  unsigned int s = atomic_load_relaxed (&t->setxid_op);
   do
     {
-      ch = t->cancelhandling;
-
       /* If the thread is exiting right now, ignore it.  */
-      if ((ch & EXITING_BITMASK) != 0)
+      if ((atomic_load_relaxed (&t->cancelhandling) & EXITING_BITMASK) != 0)
 	{
 	  /* Release the futex if there is no other setxid in
 	     progress.  */
-	  if ((ch & SETXID_BITMASK) == 0)
+	  if (s == 0)
 	    {
 	      t->setxid_futex = 1;
 	      futex_wake (&t->setxid_futex, 1, FUTEX_PRIVATE);
@@ -1004,8 +1003,7 @@ setxid_mark_thread (struct xid_command *cmdp, struct pthread *t)
 	  return;
 	}
     }
-  while (atomic_compare_and_exchange_bool_acq (&t->cancelhandling,
-					       ch | SETXID_BITMASK, ch));
+  while (atomic_compare_exchange_weak_acquire(&t->setxid_op, &s, 1));
 }
 
 
@@ -1013,16 +1011,13 @@ static void
 internal_function
 setxid_unmark_thread (struct xid_command *cmdp, struct pthread *t)
 {
-  int ch;
-
+  unsigned int s = atomic_load_relaxed (&t->setxid_op);
   do
     {
-      ch = t->cancelhandling;
-      if ((ch & SETXID_BITMASK) == 0)
+      if (s == 0)
 	return;
     }
-  while (atomic_compare_and_exchange_bool_acq (&t->cancelhandling,
-					       ch & ~SETXID_BITMASK, ch));
+  while (atomic_compare_exchange_weak_acquire (&t->setxid_op, &s, 0));
 
   /* Release the futex just in case.  */
   t->setxid_futex = 1;
@@ -1034,7 +1029,7 @@ static int
 internal_function
 setxid_signal_thread (struct xid_command *cmdp, struct pthread *t)
 {
-  if ((t->cancelhandling & SETXID_BITMASK) == 0)
+  if (atomic_load_relaxed (&t->setxid_op) == 0)
     return 0;
 
   int val;
