@@ -991,7 +991,7 @@ setxid_mark_thread (struct xid_command *cmdp, struct pthread *t)
   do
     {
       /* If the thread is exiting right now, ignore it.  */
-      if ((atomic_load_relaxed (&t->cancelhandling) & EXITING_BITMASK) != 0)
+      if ((atomic_load_relaxed (&t->cancelhandling) & THREAD_EXITING) != 0)
 	{
 	  /* Release the futex if there is no other setxid in
 	     progress.  */

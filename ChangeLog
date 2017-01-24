@@ -1,5 +1,45 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* nptl/descr.h (CANCELED_BITMASK): Rename to THREAD_CANCELED.
+	(EXITING_BITMASK): Rename to THREAD_EXITING.
+	(TERMINATED_BITMARK): Rename to THREAD_TERMINATED.
+	* nptl/allocatestack.c (setxid_mark_thread): Use THREAD_* instead of
+	*_BITMASK and use glibc C11 atomic function to access pthread
+	cancelhandling.
+	* nptl/libc-cancellation.c (__syscall_cancel): Likewise.
+	* nptl/nptl-init.c (sigcancel_handler): Likewise.
+	* nptl/pthread_cancel.c (pthread_cancel): Likewise.
+	* nptl/pthread_create.c (__free_tcb): Likewise.
+	(START_THREAD_DEFN): Likewise.
+	(__pthread_create_2_1): Likewise.
+	* nptl/pthread_detach.c (pthread_detach): Likewise.
+	* nptl/pthread_exit.c (__pthread_exit): Likewise.
+	* nptl/pthread_join.c (pthread_join): Likewise.
+	* nptl_db/td_thr_get_info.c (td_thr_get_info): Likewise.
+	* nptl_db/td_thr_getfpregs.c (td_thr_getfpregs): Likewise.
+	* nptl_db/td_thr_getgregs.c (td_thr_getregs): Likewise.
+	* nptl_db/td_thr_setfpregs.c (td_thr_setfpregs): Likewise.
+	* nptl_db/td_thr_setgregs.c (td_thr_setgregs): Likewise.
+	* sysdeps/unix/sysv/linux/arm/syscall_cancel.S
+	(__syscall_cancel_arch): Change CANCELED_BITMASK to
+	THREAD_CANCELED in comment.
+	* sysdeps/unix/sysv/linux/syscall_cancel.c
+	(__syscall_cancel_arch): Likewise.
+	* sysdeps/x86_64/nptl/tcb-offsets.sym (TCB_CANCELED_BITMASK):
+	Remove.
+	(TCB_EXITING_BITMASK): Likewise.
+	(TCB_TERMINATED_BITMASK): Likewise.
+	* sysdeps/unix/sysv/linux/i386/syscall_cancel.S
+	(__syscall_cancel_arch): Likewise.
+	* sysdeps/unix/sysv/linux/powerpc/syscall_cancel.S
+	(__syscall_cancel_arch): Likewise.
+	* sysdeps/unix/sysv/linux/sh/syscall_cancel.S
+	(__syscall_cancel_arch): Likewise.
+	* sysdeps/unix/sysv/linux/sparc/sparc32/syscall_cancel.S
+	(__syscall_cancel_arch): Likewise.
+	* sysdeps/unix/sysv/linux/sparc/sparc64/syscall_cancel.S
+	(__syscall_cancel_arch): Likewise.
+
 	* nptl/allocatestack.c (get_cached_stack): Set sexid_op on new
 	allocated stack.
 	(setxid_mark_thread): Use setxid_op to mark thread as executing

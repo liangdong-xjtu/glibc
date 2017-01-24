@@ -44,7 +44,7 @@ ENTRY (__syscall_cancel_arch)
 	.globl __syscall_cancel_arch_start
 __syscall_cancel_arch_start:
 
-	/* if (*cancelhandling & CANCELED_BITMASK)
+	/* if (*cancelhandling & THREAD_CANCELED)
 	     __syscall_do_cancel()  */
 	ldr	r0,[r0]
 	tst	r0, #4
