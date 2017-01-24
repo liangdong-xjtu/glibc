@@ -1,5 +1,14 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* manual/pattern.texi (THREAD_ATOMIC_BIT_SET): Remove.
+	(THREAD_ATOMIC_CMPXCHG_VAL): Likewise.
+	* nptl/pthreadP.h (THREAD_ATOMIC_CMPXCHG_VAL): Likewise.
+	(THREAD_ATOMIC_BIT_SET): Likewise.
+	* sysdeps/i386/nptl/tls.h (THREAD_ATOMIC_CMPXCHG_VAL): Likewise.
+	(THREAD_ATOMIC_AND): Likewise.
+	* sysdeps/x86_64/nptl/tls.h (THREAD_ATOMIC_CMPXCHG_VAL): Likewise.
+	(THREAD_ATOMIC_AND): Likewise.
+
 	* nptl/descr.h (CANCELED_BITMASK): Rename to THREAD_CANCELED.
 	(EXITING_BITMASK): Rename to THREAD_EXITING.
 	(TERMINATED_BITMARK): Rename to THREAD_TERMINATED.

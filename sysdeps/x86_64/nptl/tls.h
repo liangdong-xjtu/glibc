@@ -289,32 +289,6 @@ typedef struct
        }})
 
 
-/* Atomic compare and exchange on TLS, returning old value.  */
-# define THREAD_ATOMIC_CMPXCHG_VAL(descr, member, newval, oldval) \
-  ({ __typeof (descr->member) __ret;					      \
-     __typeof (oldval) __old = (oldval);				      \
-     if (sizeof (descr->member) == 4)					      \
-       asm volatile (LOCK_PREFIX "cmpxchgl %2, %%fs:%P3"		      \
-		     : "=a" (__ret)					      \
-		     : "0" (__old), "r" (newval),			      \
-		       "i" (offsetof (struct pthread, member)));	      \
-     else								      \
-       /* Not necessary for other sizes in the moment.  */		      \
-       abort ();							      \
-     __ret; })
-
-
-/* Atomic logical and.  */
-# define THREAD_ATOMIC_AND(descr, member, val) \
-  (void) ({ if (sizeof ((descr)->member) == 4)				      \
-	      asm volatile (LOCK_PREFIX "andl %1, %%fs:%P0"		      \
-			    :: "i" (offsetof (struct pthread, member)),	      \
-			       "ir" (val));				      \
-	    else							      \
-	      /* Not necessary for other sizes in the moment.  */	      \
-	      abort (); })
-
-
 # define CALL_THREAD_FCT(descr) \
   ({ void *__res;							      \
      asm volatile ("movq %%fs:%P2, %%rdi\n\t"				      \
