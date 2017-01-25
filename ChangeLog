@@ -1,5 +1,15 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* nptl/pthreadP.h (__pthread_timedjoin_np): Define.
+	* nptl/pthread_join.c (pthread_join): Use __pthread_timedjoin_np.
+	* nptl/pthread_timedjoin.c (cleanup): Use CAS on argument setting.
+	(pthread_timedjoin_np): Define internal symbol and common code from
+	pthread_join.
+	* sysdeps/unix/sysv/linux/i386/lowlevellock.h (__lll_timedwait_tid):
+	Remove superflous checks.
+	* sysdeps/unix/sysv/linux/x86_64/lowlevellock.h (__lll_timedwait_tid):
+	Likewise.
+
 	* manual/pattern.texi (THREAD_ATOMIC_BIT_SET): Remove.
 	(THREAD_ATOMIC_CMPXCHG_VAL): Likewise.
 	* nptl/pthreadP.h (THREAD_ATOMIC_CMPXCHG_VAL): Likewise.
