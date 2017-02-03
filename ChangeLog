@@ -1,5 +1,9 @@
 2016-01-30  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
 
+	* sysdeps/unix/sysv/linux/hppa/syscall_cancel.S: New file.
+	* sysdeps/unix/sysv/linux/hppa/sysdep-cancel.h (__pthread_get_pc):
+	New function.
+
 	* nptl/libc-cancellation.c (__syscall_cancel): Define and use 7
 	argument syscall if architecture requires it.
 	* nptl/pthreadP.h (__syscall_cancel_arch): Likewise.
