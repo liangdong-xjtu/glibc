@@ -19,6 +19,9 @@
 #include <setjmp.h>
 #include <signal.h>
 
+#if _JUMP_BUF_SIGSET_NSIG < _NSIG
+# error _JUMP_BUF_SIGSET_NSIG <  _NSIG
+#endif
 
 /* Set the signal mask to the one specified in ENV, and jump
    to the position specified in ENV, causing the setjmp
@@ -30,9 +33,13 @@ __libc_siglongjmp (sigjmp_buf env, int val)
   _longjmp_unwind (env, val);
 
   if (env[0].__mask_was_saved)
-    /* Restore the saved signal mask.  */
-    (void) __sigprocmask (SIG_SETMASK, &env[0].__saved_mask,
-			  (sigset_t *) NULL);
+    {
+      _Static_assert (sizeof (env[0].__target) == sizeof (__sigset_t),
+		      "__jmpbuf_target_t == __sigset_t");
+      __sigset_t *saved_mask = (__sigset_t *) &env[0].__saved_mask;
+      /* Restore the saved signal mask.  */
+      (void) __sigprocmask (SIG_SETMASK, saved_mask, (sigset_t *) NULL);
+    }
 
   /* Call the machine-dependent function to restore machine state.  */
   __longjmp (env[0].__jmpbuf, val ?: 1);

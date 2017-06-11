@@ -27,6 +27,7 @@
 __BEGIN_DECLS
 
 #include <bits/setjmp.h>		/* Get `__jmp_buf'.  */
+#include <bits/setjmp3.h>
 #include <bits/types/__sigset_t.h>
 
 /* Calling environment, plus possibly a saved signal mask.  */
@@ -38,7 +39,7 @@ struct __jmp_buf_tag
        or add others before it.  */
     __jmp_buf __jmpbuf;		/* Calling environment.  */
     int __mask_was_saved;	/* Saved the signal mask?  */
-    __sigset_t __saved_mask;	/* Saved signal mask.  */
+    __jmpbuf_target_t __target;	/* Target specific data.  */
   };
 
 

@@ -19,6 +19,10 @@
 #include <setjmp.h>
 #include <signal.h>
 
+#if _JUMP_BUF_SIGSET_NSIG < _NSIG
+# error _JUMP_BUF_SIGSET_NSIG <  _NSIG
+#endif
+
 /* This function is called by the `sigsetjmp' macro
    before doing a `__setjmp' on ENV[0].__jmpbuf.
    Always return zero.  */
@@ -26,9 +30,12 @@
 int
 __sigjmp_save (sigjmp_buf env, int savemask)
 {
+  _Static_assert (sizeof (env[0].__target) == sizeof (__sigset_t),
+		  "__jmpbuf_target_t == __sigset_t");
+  __sigset_t *saved_mask = (__sigset_t *) &env[0].__saved_mask;
   env[0].__mask_was_saved = (savemask &&
 			     __sigprocmask (SIG_BLOCK, (sigset_t *) NULL,
-					    &env[0].__saved_mask) == 0);
+					    saved_mask) == 0);
 
   return 0;
 }
