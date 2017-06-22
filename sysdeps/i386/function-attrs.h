@@ -28,5 +28,12 @@
 # define private_function	/* empty */
 #else
 # define internal_function	__attribute__ ((regparm (3), stdcall))
-# define private_function	__attribute__ ((regparm (3), stdcall))
+# if defined __SHSTK__ && defined __CET__
+/* We can only pass 2 parameters in registers for private function calls
+   when -finstrument-control-flow -mshstk are used since one register
+   used by _dl_runtime_resolve as scratch register.  */
+#  define private_function	__attribute__ ((regparm (2), stdcall))
+# else
+#  define private_function	__attribute__ ((regparm (3), stdcall))
+# endif
 #endif
