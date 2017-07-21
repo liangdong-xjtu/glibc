@@ -6025,6 +6025,28 @@ $as_echo "$libc_linker_feature" >&6; }
 config_vars="$config_vars
 have-no-dynamic-linker = $libc_cv_no_dynamic_linker"
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for -static-pie" >&5
+$as_echo_n "checking for -static-pie... " >&6; }
+if ${libc_cv_static_pie+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if { ac_try='${CC-cc} -static-pie -xc /dev/null -S -o /dev/null'
+  { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_try\""; } >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; }; then :
+  libc_cv_static_pie=yes
+else
+  libc_cv_static_pie=no
+fi
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $libc_cv_static_pie" >&5
+$as_echo "$libc_cv_static_pie" >&6; }
+config_vars="$config_vars
+have-static-pie = $libc_cv_static_pie"
+
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for -fpie" >&5
 $as_echo_n "checking for -fpie... " >&6; }
 if ${libc_cv_fpie+:} false; then :
