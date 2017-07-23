@@ -1473,6 +1473,20 @@ LIBC_TRY_CC_OPTION([-static-pie],
 ])
 LIBC_CONFIG_VAR([have-static-pie], [$libc_cv_static_pie])
 
+AC_CACHE_CHECK(for -static -pie, libc_cv_static_and_pie, [dnl
+cat > conftest.c <<EOF
+void
+_start (void)
+{
+}
+EOF
+if AC_TRY_COMMAND(${CC-cc} $CFLAGS $CPPFLAGS $LDFLAGS -static -pie -nostartfiles -nostdlib $no_ssp -o conftest conftest.c -v 2>&1 | grep " -static -pie " > /dev/null); then
+    libc_cv_static_and_pie=yes
+  else
+    libc_cv_static_and_pie=no
+  fi
+rm -f conftest*])
+
 AC_CACHE_CHECK(for -fpie, libc_cv_fpie, [dnl
 LIBC_TRY_CC_OPTION([-fpie], [libc_cv_fpie=yes], [libc_cv_fpie=no])
 ])

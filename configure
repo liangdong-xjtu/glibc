@@ -6047,6 +6047,32 @@ $as_echo "$libc_cv_static_pie" >&6; }
 config_vars="$config_vars
 have-static-pie = $libc_cv_static_pie"
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for -static -pie" >&5
+$as_echo_n "checking for -static -pie... " >&6; }
+if ${libc_cv_static_and_pie+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat > conftest.c <<EOF
+void
+_start (void)
+{
+}
+EOF
+if { ac_try='${CC-cc} $CFLAGS $CPPFLAGS $LDFLAGS -static -pie -nostartfiles -nostdlib $no_ssp -o conftest conftest.c -v 2>&1 | grep " -static -pie " > /dev/null'
+  { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_try\""; } >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; }; then
+    libc_cv_static_and_pie=yes
+  else
+    libc_cv_static_and_pie=no
+  fi
+rm -f conftest*
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $libc_cv_static_and_pie" >&5
+$as_echo "$libc_cv_static_and_pie" >&6; }
+
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for -fpie" >&5
 $as_echo_n "checking for -fpie... " >&6; }
 if ${libc_cv_fpie+:} false; then :
